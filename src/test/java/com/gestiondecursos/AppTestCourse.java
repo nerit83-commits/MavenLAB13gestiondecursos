@@ -13,17 +13,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-/*
-*CourseTest.java
-*Testea constructor, getters, showInformation
-*1 test parametrizado 
-*1 test normal (test individual)
-*1 uso completo del ciclo de vida de JUnit (BeforeAll, AfterAll, BeforEach y AfterEach)
-*/
+
 
 public class AppTestCourse { 
  
-    private Course course;
+    private Course course; 
 
     //CICLO DE VIDA
 
