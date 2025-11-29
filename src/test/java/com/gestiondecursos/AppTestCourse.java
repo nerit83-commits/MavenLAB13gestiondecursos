@@ -17,36 +17,36 @@ import static org.junit.jupiter.api.Assertions.*;
 *CourseTest.java
 *Testea constructor, getters, showInformation
 *1 test parametrizado 
-*1 test normal
-*1 ciclo de vida
+*1 test normal (test individual)
+*1 uso completo del ciclo de vida de JUnit (BeforeAll, AfterAll, BeforEach y AfterEach)
 */
 
-public class AppTestCourse {
-
+public class AppTestCourse { 
+ 
     private Course course;
 
     //CICLO DE VIDA
 
-    @BeforeAll
+    @BeforeAll  //Se ejecuta solo una vez antes de todos los test.
     static void beforeAll() {
         System.out.println("Iniciando AppTest...");
     }
 
-    @AfterAll
+    @AfterAll  ////Se ejecuta solo una vez después de todos los test.
     static void afterAll() {
         System.out.println("Finalizando AppTest...");
     }
 
 
-    @BeforeEach
+    @BeforeEach  //Se ejecuta antes de cada test y sirve para iniciar una instancia fresca.
     void setUp() {
         System.out.println("BeforeEach → creando instancia de Course");
         course = new Course("Intro a Java", 8);
     }
 
-    @AfterEach
+    @AfterEach //Se ejecuta después de cada test y evita interferencia entre pruebas.
     void tearDown() {
-        System.out.println("⚫ AfterEach → limpiando instancia");
+        System.out.println("AfterEach → limpiando instancia");
         course = null;
     }
 
@@ -54,8 +54,8 @@ public class AppTestCourse {
     @Test
     @DisplayName("Constructor crea correctamente un objeto Course")
     void testCourseNotNull() {
-        assertNotNull(course);
-        assertEquals("Intro a Java", course.getTitle());
+        assertNotNull(course);  //Verifica que el objeto se haya creado.
+        assertEquals("Intro a Java", course.getTitle());  //Verifica los valores del constructor.
         assertEquals(8, course.getDuration());
     }
 
@@ -65,8 +65,8 @@ public class AppTestCourse {
     @ValueSource(strings = {"Python", "Git", "Docker"})
     @DisplayName("Asignación de diferentes títulos de curso")
     void testSetTitle(String title) {
-        course.setTitle(title);
-        assertEquals(title, course.getTitle());
+        course.setTitle(title);  //Cambia el título usando valores distintos.
+        assertEquals(title, course.getTitle());  //Verifica que el setter actualiza el valor correctamente.
     }
 }
 

@@ -14,17 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 /*
-*Test individual:
-*Crea OnsiteCourse
-*Verifica título, duración, aula y cupo → OK
-*Test parametrizado:
-*Prueba cupos: 10, 0 y -5
-*Verifica comportamiento especial para cupos negativos (tu clase los pone en 0)
-*Ciclo de vida del test:
-*BeforeAll → mensaje inicial
-*AfterAll → mensaje final
-*BeforeEach → crea instancia nueva
-*AfterEach → limpia instancia
+*Test individual: crea OnsiteCourse y verifica título, duración, aula y cupo → OK
+*Test parametrizado: prueba cupos: 10, 0 y -5, Verifica comportamiento especial para cupos negativos (tu clase los pone en 0)
+*Ciclo de vida del test: BeforeAll (mensaje inicial), AfterAll (mensaje final), BeforeEach (crea una instancia nueva) y 
+*AfterEach (limpia la instancia)
 */
 
 
@@ -35,35 +28,35 @@ public class AppTestOnsiteCourse {
 
     // CICLO DE VIDA
 
-    @BeforeAll
+    @BeforeAll  //Se ejecuta solo una vez antes de todos los test.
     static void beforeAll() {
         System.out.println("Iniciando OnsiteCourseTest...");
     }
 
-    @AfterAll
+    @AfterAll  //Se ejecuta solo una vez después de todos los test.
     static void afterAll() {
         System.out.println("Finalizando OnsiteCourseTest...");
     }
 
     @BeforeEach
-    void setUp() {
+    void setUp() {  //Se ejecuta antes de cada test individual.
         System.out.println("BeforeEach → creando OnsiteCourse");
-        onsiteCourse = new OnsiteCourse("Cocina Básica", 6, "A-12", 20);
+        onsiteCourse = new OnsiteCourse("Cocina Básica", 6, "A-12", 20); //Se crea una instancia para evitar contaminación entre test.
     }
 
-    @AfterEach
+    @AfterEach  //Se ejecuta después de cada test individual.
     void tearDown() {
-        System.out.println("AfterEach → limpiando instancia");
-        onsiteCourse = null;
+        System.out.println("AfterEach = limpiando instancia");
+        onsiteCourse = null;  //Se limpira para liberar memoria.
     }
 
     
     // TEST INDIVIDUAL
 
     @Test
-    @DisplayName("✔ Constructor crea correctamente el OnsiteCourse")
+    @DisplayName("Constructor crea correctamente el OnsiteCourse")
     void testConstructor() {
-        assertNotNull(onsiteCourse);
+        assertNotNull(onsiteCourse);  //Verifica que la instancia no sea nula.
 
         assertEquals("Cocina Básica", onsiteCourse.getTitle());
         assertEquals(6, onsiteCourse.getDuration());
@@ -80,13 +73,13 @@ public class AppTestOnsiteCourse {
             "0",
             "-5"
     })
-    @DisplayName("✔ Validación de cupos (maxQuota) con distintos valores")
-    void testSetMaxQuota(int cuota) {
+    @DisplayName("Validación de cupos (maxQuota) con distintos valores")
+    void testSetMaxQuota(int cuota) {  //Llama al setter con distintos valores.
         onsiteCourse.setMaxQuota(cuota);
 
-        if (cuota < 0) {
+        if (cuota < 0) {  //Si el valor es negativo, lo convierte a 0.
             assertEquals(0, onsiteCourse.getMaxQuota(), "Valores negativos deben convertirse a 0");
-        } else {
+        } else {  //Si el valor es válido, debe coincidir.
             assertEquals(cuota, onsiteCourse.getMaxQuota());
         }
     }
