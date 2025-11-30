@@ -47,7 +47,7 @@ public class AppTestCourse {
     //TEST INDIVIDUAL
     @Test
     @DisplayName("Constructor crea correctamente un objeto Course")
-    void testCourseNotNull() {  
+    void testCourseNotNull() { 
         assertNotNull(course);  //Verifica que el objeto se haya creado.
         assertEquals("Intro a Java", course.getTitle());  //Verifica los valores del constructor.
         assertEquals(8, course.getDuration());
