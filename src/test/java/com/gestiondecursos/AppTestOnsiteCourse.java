@@ -14,10 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 /*
-*Test individual: crea OnsiteCourse y verifica título, duración, aula y cupo → OK
-*Test parametrizado: prueba cupos: 10, 0 y -5, Verifica comportamiento especial para cupos negativos (tu clase los pone en 0)
-*Ciclo de vida del test: BeforeAll (mensaje inicial), AfterAll (mensaje final), BeforeEach (crea una instancia nueva) y 
-*AfterEach (limpia la instancia)
+*Identificar 1 test y Reescribilor usando @ParameterizedTest con:
+ @MethodSource (idealmente uno que necesite múltiples parámetros o lógica 
+personalizada)
 */
 
 
@@ -51,11 +50,25 @@ public class AppTestOnsiteCourse {
     }
 
     
-    // TEST INDIVIDUAL
+    // TEST QUE SE PUEDE PARAMETRIZAR
 
-    @Test
+    @ParameterizedTest  //Constructor test usando múltiples parámetros.
+    @CsvSource({  //Permite definir múltiples conjuntos de datos para el test.
+            "Cocina Básica, 6, A-12, 20",
+            "Fotografía, 4, B-5, 15",
+            "Programación, 10, C-3, 30"
+    })
     @DisplayName("Constructor crea correctamente el OnsiteCourse")
-    void testConstructor() {
+    void testOnsiteCourseConstructor(String title, int duration, String classroom, int maxQuota) {
+        OnsiteCourse course = new OnsiteCourse(title, duration, classroom, maxQuota);
+
+        assertNotNull(course);  //Verifica que la instancia no sea nula.
+        assertEquals(title, course.getTitle());
+        assertEquals(duration, course.getDuration());
+        assertEquals(classroom, course.getClassroom());
+        assertEquals(maxQuota, course.getMaxQuota());
+    }
+    /*void testConstructor() {
         assertNotNull(onsiteCourse);  //Verifica que la instancia no sea nula.
 
         assertEquals("Cocina Básica", onsiteCourse.getTitle());
@@ -63,7 +76,7 @@ public class AppTestOnsiteCourse {
         assertEquals("A-12", onsiteCourse.getClassroom());
         assertEquals(20, onsiteCourse.getMaxQuota());
     }
-
+    */
  
     // TEST PARAMETRIZADO
 
