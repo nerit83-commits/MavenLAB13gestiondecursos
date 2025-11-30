@@ -15,14 +15,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 
-public class AppTestCourse { 
- 
+public class AppTestCourse {  
+   
     private Course course; 
 
     //CICLO DE VIDA
 
     @BeforeAll  //Se ejecuta solo una vez antes de todos los test.
-    static void beforeAll() {
+    static void beforeAll() {  
         System.out.println("Iniciando AppTest...");
     }
 
@@ -33,21 +33,21 @@ public class AppTestCourse {
 
 
     @BeforeEach  //Se ejecuta antes de cada test y sirve para iniciar una instancia fresca.
-    void setUp() {
+    void setUp() {  //Crea una nueva instancia de Course antes de cada prueba.
         System.out.println("BeforeEach → creando instancia de Course");
         course = new Course("Intro a Java", 8);
     }
 
     @AfterEach //Se ejecuta después de cada test y evita interferencia entre pruebas.
-    void tearDown() {
+    void tearDown() {  //Limpia la instancia.
         System.out.println("AfterEach → limpiando instancia");
-        course = null;
+        course = null;  //Elimina la referencia al objeto Course.
     }
 
     //TEST INDIVIDUAL
     @Test
     @DisplayName("Constructor crea correctamente un objeto Course")
-    void testCourseNotNull() {
+    void testCourseNotNull() {  
         assertNotNull(course);  //Verifica que el objeto se haya creado.
         assertEquals("Intro a Java", course.getTitle());  //Verifica los valores del constructor.
         assertEquals(8, course.getDuration());
